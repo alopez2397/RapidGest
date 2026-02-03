@@ -1,0 +1,8 @@
+{
+  "name": "RapidGest TPV",
+  "short_name": "TPV",
+  "start_url": "/rapidgest/tpv.php",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#198754"
+}
