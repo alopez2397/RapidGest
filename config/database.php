@@ -1,7 +1,7 @@
 <?php
 class Database {
     public static function conectar() {
-        $db = new mysqli("localhost", "Administrador", "8915452@jll", "rapidgest");
+        $db = new mysqli("94.76.251.66:3308", "Administrador", "8915452@jll", "rapidgest");
         if ($db->connect_error) {
             die("Error de conexión");
         }
