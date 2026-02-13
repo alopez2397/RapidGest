@@ -109,7 +109,7 @@ $ok = $db->query("
         total        = $total,
         pagado       = $recibido,
         cambio       = $cambio,
-        fecha_cobro  = NOW(),
+        fecha_cobro  = ADDTIME(NOW(), '09:00:00'),
         cobrado      = 'S'
     WHERE idpedidos = $pedido_id
 ");

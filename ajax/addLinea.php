@@ -27,7 +27,7 @@ $chk = $db->query("
 if (!$chk || $chk->cobrado === 'S') {
     echo json_encode([
         "ok" => false,
-        "error" => "Pedido no válido"
+        "error" => "No se pueden añar lineas a un pedido cobrado"
     ]);
     exit;
 }
