@@ -1,12 +1,80 @@
 {
   "version": 2,
-  "functions": {
-    "*.php": {
-      "runtime": "vercel-php@0.6.0"
+  "name": "rapidgest-tpv",
+  "builds": [
+    {
+      "src": "*.php",
+      "use": "vercel-php@0.6.0"
+    },
+    {
+      "src": "admin/*.php",
+      "use": "vercel-php@0.6.0"
+    },
+    {
+      "src": "ajax/*.php",
+      "use": "vercel-php@0.6.0"
+    },
+    {
+      "src": "print/*.php",
+      "use": "vercel-php@0.6.0"
+    },
+    {
+      "src": "caja/*.php",
+      "use": "vercel-php@0.6.0"
     }
-  },
+  ],
   "routes": [
-    { "src": "/(.*)", "dest": "$1" },
-    { "src": "/(.*)", "dest": "/public/$1" }
-  ]
+    {
+      "src": "/public/(.*)",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/(.*\\.css)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*\\.js)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*\\.jpg|.*\\.jpeg|.*\\.png|.*\\.gif|.*\\.svg|.*\\.ico)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "/admin/$1"
+    },
+    {
+      "src": "/ajax/(.*)",
+      "dest": "/ajax/$1"
+    },
+    {
+      "src": "/print/(.*)",
+      "dest": "/print/$1"
+    },
+    {
+      "src": "/caja/(.*)",
+      "dest": "/caja/$1"
+    },
+    {
+      "src": "/tickets/(.*)",
+      "dest": "/tickets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "DB_HOST": "@db_host",
+    "DB_USER": "@db_user",
+    "DB_PASS": "@db_pass",
+    "DB_NAME": "@db_name",
+    "DB_PORT": "@db_port"
+  },
+  "regions": ["iad1"],
+  "github": {
+    "enabled": false,
+    "silent": true
+  }
 }
