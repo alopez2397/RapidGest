@@ -1,0 +1,8 @@
+php_value display_errors On
+php_value mbstring.http_input auto
+php_value date.timezone Europe/Dublin
+Options -Indexes
+DirectoryIndex index.php
+<FilesMatch ".(env|log|sql)$">
+    Require all denied
+</FilesMatch>

@@ -7,7 +7,6 @@ require_once "config/auth.php";
 // Requiere autenticación
 Auth::require();
 
-
 $db = Database::conectar();
 
 /* Si viene pedido por URL → cargarlo en sesión */
@@ -22,12 +21,6 @@ if (!isset($_SESSION['pedido_id'])) {
 
 $pedido_id = intval($_SESSION['pedido_id']);
 
-if (preg_match('/Mobile|Android|iPhone/i', $_SERVER['HTTP_USER_AGENT'])) {
-    header("Location: tpv_mobil.php?pedido=" . intval($_SESSION['pedido_id']));
-    exit;
-
-}
-
 /* Cargar datos del pedido */
 $stmt = Database::execute(
     "SELECT * FROM pedidos WHERE idpedidos = ?",
@@ -35,7 +28,7 @@ $stmt = Database::execute(
     [$pedido_id]
 );
 
-$result = $stmt ? $stmt->get_result() : null;
+$result = $stmt->get_result();
 
 if (!$result || $result->num_rows == 0) {
     unset($_SESSION['pedido_id']);
@@ -66,7 +59,7 @@ if (!$cliente) {
 }
 
 /* Cargar familias */
-$familias = $db->query("SELECT * FROM familias WHERE eliminado='0' ORDER BY familia");
+$familias = $db->query("SELECT * FROM familias ORDER BY familia");
 
 ?>
 <!DOCTYPE html>
@@ -153,7 +146,7 @@ $familias = $db->query("SELECT * FROM familias WHERE eliminado='0' ORDER BY fami
                 left: 0;
                 width: 200px;
                 bottom: var(--footer-height);
-                z-index: 999;
+                z-index: 1020;
                 box-shadow: 2px 0 10px rgba(0,0,0,0.3);
             }
             
@@ -185,7 +178,7 @@ $familias = $db->query("SELECT * FROM familias WHERE eliminado='0' ORDER BY fami
                 left: 0;
                 right: 0;
                 bottom: var(--footer-height);
-                z-index: 100;
+                z-index: 1010;
                 overflow-y: auto;
             }
             
@@ -210,7 +203,7 @@ $familias = $db->query("SELECT * FROM familias WHERE eliminado='0' ORDER BY fami
                 left: 0;
                 right: 0;
                 bottom: var(--footer-height);
-                z-index: 101;
+                z-index: 1030;
                 border-left: none;
                 border-top: 2px solid #dee2e6;
                 overflow-y: auto;
@@ -291,7 +284,7 @@ $familias = $db->query("SELECT * FROM familias WHERE eliminado='0' ORDER BY fami
             position: fixed;
             top: calc(var(--header-height) + 10px);
             left: 10px;
-            z-index: 1001;
+            z-index: 1050;
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -299,13 +292,25 @@ $familias = $db->query("SELECT * FROM familias WHERE eliminado='0' ORDER BY fami
             color: white;
             border: none;
             font-size: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,123,255,0.5);
             display: none;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-toggle:hover {
+            background: #0056b3;
+            transform: scale(1.1);
+        }
+        
+        .menu-toggle:active {
+            transform: scale(0.95);
         }
 
         @media (max-width: 768px) {
             .menu-toggle {
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
 
@@ -314,7 +319,7 @@ $familias = $db->query("SELECT * FROM familias WHERE eliminado='0' ORDER BY fami
             position: fixed;
             bottom: calc(var(--footer-height) + 10px);
             right: 10px;
-            z-index: 1001;
+            z-index: 1050;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -324,6 +329,11 @@ $familias = $db->query("SELECT * FROM familias WHERE eliminado='0' ORDER BY fami
             font-size: 24px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             display: none;
+            transition: all 0.3s ease;
+        }
+        
+        .ver-pedido-btn:active {
+            transform: scale(0.95);
         }
 
         @media (max-width: 768px) {
@@ -365,7 +375,7 @@ $familias = $db->query("SELECT * FROM familias WHERE eliminado='0' ORDER BY fami
         }
 
         /* Overlay para cerrar paneles */
-        .overlay {
+      /*  .overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -373,12 +383,12 @@ $familias = $db->query("SELECT * FROM familias WHERE eliminado='0' ORDER BY fami
             right: 0;
             bottom: 0;
             background: rgba(0,0,0,0.5);
-            z-index: 998;
+            z-index: 1005;
         }
 
         .overlay.show {
             display: block;
-        }
+        }*/
 
         /* Líneas de pedido móvil */
         @media (max-width: 768px) {
