@@ -4,23 +4,23 @@
   "builds": [
     {
       "src": "*.php",
-      "use": "vercel-php@0.6.0"
+      "use": "vercel-php@0.9.0"
     },
     {
       "src": "admin/*.php",
-      "use": "vercel-php@0.6.0"
+      "use": "vercel-php@0.9.0"
     },
     {
       "src": "ajax/*.php",
-      "use": "vercel-php@0.6.0"
+      "use": "vercel-php@0.9.0"
     },
     {
       "src": "print/*.php",
-      "use": "vercel-php@0.6.0"
+      "use": "vercel-php@0.9.0"
     },
     {
       "src": "caja/*.php",
-      "use": "vercel-php@0.6.0"
+      "use": "vercel-php@0.9.0"
     }
   ],
   "routes": [
